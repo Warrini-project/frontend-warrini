@@ -1,0 +1,120 @@
+.login-background {
+    background-image: url(../../assets/login-background1.jpg);
+    background-size: cover;
+    background-position: center; /* Center the image horizontally and vertically */
+    background-repeat: no-repeat;
+}
+.login-page{
+    height: 100vh;
+    width: 100%;
+}
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+.login-form{
+    width: 80%;
+}
+#floatingInputCustom, #floatingPasswordCustom{
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border-radius: 0.5rem;
+    resize: none;
+    color: black;
+    border: 1px solid #37C6F4;
+    font-size: 1.1rem;
+}
+#floatingInputCustom:focus, #floatingPasswordCustom:focus{
+    outline: none;
+}
+@media screen and (max-width: 1024px) {
+    .contact__container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  /* ================ MEDIA QUERIES (SMALL DEVICES) ============= */
+  @media screen and (max-width: 600px) {
+    .contact__container {
+      width: var(--container-width-sm);
+    }
+  }
+h1{
+    margin-bottom: 40px;
+    color: #37C6F4;
+}
+.login-btn{
+    margin-top: 10px;
+    padding: 10px 0;
+    background-color: #37C6F4;
+    color: white;
+    border: #37C6F4 1px solid;
+    border-radius: 30px;
+}
+.link{
+    color: #37C6F4;
+    text-decoration: none;
+}
+.paragraph-reset{
+    margin-bottom: 30px;
+}
+.reset-btn{
+    margin-top: 0px;
+}
+.activate-text{
+    margin-bottom: 10px;
+}
+.activate-btn{
+    padding: 10px 15px;
+    margin-top: 20px;
+}
+hr{
+    width: 70%;
+    color: black;
+}
+.social-btn{
+    margin-top: 10px;
+    padding: 10px 10px;
+    color: white;
+    border-radius: 30px;
+    font-size: 17px;
+}
+.google-btn{
+    background-color: white;
+    border: black 1px solid;
+    color: black;
+}
+.facebook-btn{
+    background-color: #0866FF;
+    border: #0866FF 1px solid;
+}
+.linkedin-btn{
+    background-color: #0778B6;
+    border: #0778B6 1px solid;
+}
+.social-btns{
+    display: flex;
+    flex-direction: column;
+}
+.social-icon{
+    font-size: 22px;    
+}
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+}

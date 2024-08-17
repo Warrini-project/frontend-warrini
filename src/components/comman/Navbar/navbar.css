@@ -1,0 +1,77 @@
+.sticky{
+    background-color: #ffffffa9 !important;
+    transition: all 0.3s ease-out 0s !important;
+    box-shadow: 0px 10px 10px 0px rgba(9, 5, 29, 0.171) !important;
+    backdrop-filter: blur(15px) !important;
+}
+.sticky1{
+    background-color: #ffffffa9 !important;
+    transition: all 0.3s ease-out 0s !important;
+    box-shadow: 0px 10px 10px 0px rgba(9, 5, 29, 0.171) !important;
+    backdrop-filter: blur(15px) !important;
+}
+.sticky1 .guideMeLink, .sticky1 .guideMeLink .nav-link{
+    color: black !important;
+}
+.navbar{
+    font-size: 1.1rem !important;
+}
+.navbar-brand{
+    font-size: 1.5rem !important;
+    color: #37C6F4 !important;
+}
+.nav-link{
+    color: black !important;
+    transition: all 0.3s ease-in-out 0s;
+    position: relative;
+}
+.nav-link:hover{
+    color: #37C6F4 !important; 
+}
+.btn{
+    color: #37C6F4 !important;
+    border: 1px solid #37C6F4;
+}
+.btn:hover{
+    color: white !important;
+    background: #37C6F4 !important;
+    border: 1px solid #37C6F4;
+}
+.dropdown-item {
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.dropdown-item:hover{
+    color: #37C6F4 !important;
+}
+.dropdown-menu {
+    padding: 0;
+}
+@media (max-width: 500px){
+    .nav-link{
+        margin: 0;
+    }
+    .nav{
+        margin: 0;
+    }
+}
+.user-icon{
+    border: none;
+    background-color: transparent !important;
+}
+.user-icon:hover{
+    background-color: transparent !important;
+    border: none !important;
+    color: #37C6F4 !important;
+}
+.user-icon:focus, .user-icon:active{
+    background-color: transparent !important;
+}
+.icon{
+    background-color: transparent !important;
+    color: #37C6F4 !important;
+}
+.guideMeLink .nav-link, .guideMeLink{
+    color: white !important;
+}

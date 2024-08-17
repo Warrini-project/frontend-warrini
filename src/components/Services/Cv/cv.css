@@ -1,0 +1,66 @@
+.cv-section{
+    padding: 3rem 0 2rem !important;
+}
+.cv-text{
+    padding-top: 10rem !important;
+    padding: 0rem 4rem;
+}
+.cv-title{
+    color: black !important;
+    margin-bottom: 25px;
+}
+.cv-description{
+    text-align: justify;
+    font-size: 18px;
+    padding-bottom: 25px;
+}
+.cv-btn{
+    padding: 10px 15px;
+    color: white;
+    font-weight: 700;
+    background: #37C6F4;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.cv-btn:hover{
+    filter: brightness(95%);
+}
+#forum{
+    padding: 5rem 10rem 4rem 10rem;
+}
+.certifs{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.project1, .project2{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+@media (max-width: 600px){
+    .img-fluid{
+        display: none;
+    }
+    .cv-section{
+        padding-top: 0px !important;
+    }
+    #forum{
+        padding: 2rem 1rem 2rem 1rem;
+    }
+    .project1, .project2{
+        gap: 5px;
+        flex-direction: column;
+    }
+    #forum h4{
+        font-size: 19px;
+    }
+    input{
+        font-size: 14px;
+    }
+    .certifs{
+        flex-direction: column;
+        gap: 5px;
+    }
+}

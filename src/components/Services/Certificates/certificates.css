@@ -1,0 +1,130 @@
+.certification{
+    width: 100%;
+}
+.certification-body{
+    padding: 0 0.8rem 1rem 0.8rem;
+    width: 100%;
+    margin-top: 5rem;
+}
+.domain-choose {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Set a fixed width for checkboxes to make them the same size */
+.choices input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; /* Adjust as needed */
+}
+.level-choose {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.levles {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Set a fixed width for checkboxes to make them the same size */
+.levels input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; /* Adjust as needed */
+}
+.certif-hr{
+    width: 100%;
+    color: grey;
+}
+.filter-title{
+    font-weight: 600;
+}
+.clear-btn{
+    background: none;
+    border: none;
+    color: #0065BA;
+}
+.clear-btn:hover{
+    text-decoration: underline;
+}
+.domain-input, .search{
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 15px;
+    border-radius: 0px;
+    margin: 10px 0px;
+}
+.search:focus, .domain-input:focus{
+    border: 1px solid #37C6F4;
+}
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-btn{
+    padding: 10px;
+    background-color: #37C6F4;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+.search-btn-icon{
+    font-size: 18px;
+}
+.search-btn:hover{
+    filter: brightness(95%);
+}
+.certif-list{
+    margin-top: 20px;
+}
+.certifCard{
+    border: 1px solid #37C6F4;
+    border-radius: 20px !important;
+    padding: 10px;
+    height: 100% !important;
+}
+.cardTitle{
+    font-size: 20px;
+    text-align: center;
+}
+.cardDesc{
+    font-size: 14px;
+}
+.certifRate{
+    color: #F69C08;
+}
+.caracts{
+    border: 1px solid #37C6F4;
+}
+.cardBtn{
+    text-decoration: none;
+}
+.cardBottom{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+}
+.cardImg{
+    object-fit: cover;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    height: 150px;
+}
+.cardLink{
+    text-decoration: none;
+    height: 100% !important;
+}

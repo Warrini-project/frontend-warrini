@@ -1,0 +1,58 @@
+.contact{
+    height: 100vh;
+    position: relative;
+    background-image: url(../../../assets/contact2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+h1{
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2E2E2E;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+input, textarea{
+    width: 100%;
+    padding: 1.5rem;
+    background: transparent;
+    border-radius: 0.5rem;
+    resize: none;
+    color: black;
+    border: 1px solid #37C6F4;
+    font-size: 1.1rem;
+}
+input:focus, textarea:focus{
+    outline: none;
+}
+@media screen and (max-width: 1024px) {
+    .contact__container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  /* ================ MEDIA QUERIES (SMALL DEVICES) ============= */
+  @media screen and (max-width: 600px) {
+    .contact__container {
+      width: var(--container-width-sm);
+    }
+  }
+.contact-btn{
+    padding: 10px 0;
+    background-color: white;
+    color: #37C6F4;
+    border: #37C6F4 1px solid;
+    border-radius: 5px;
+}
+.contact-btn:hover{
+    background-color: #37C6F4;
+    color: white;
+}
+@media screen and (max-width:700px){
+  h1{
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,67 @@
+.about{
+    color: #1d2d31;
+    height: 100vh;
+    position: relative;
+    background-image: url(../../../assets/about.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}   
+.about-text{
+    padding-top: 100px !important;
+    padding-bottom: 20px !important;
+    padding-left: 50px !important;
+}
+.about-body{
+    padding-top: 150px;
+    font-size: 1.8em !important;
+    font-weight: bold;
+}
+.title{
+    color: white;
+}
+.about-btn {
+    --c:  white; /* the color*/
+    box-shadow: 0 0 0 .1em inset var(--c); 
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background: 
+      var(--_g) calc(var(--_p,0%) - 100%) 0%,
+      var(--_g) calc(200% - var(--_p,0%)) 0%,
+      var(--_g) calc(var(--_p,0%) - 100%) 100%,
+      var(--_g) calc(200% - var(--_p,0%)) 100%;
+    background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
+    outline-offset: .1em;
+    transition: background-size .4s, background-position 0s .4s;
+    color: white;
+    text-decoration: none;
+  }
+  .about-btn:hover {
+    --_p: 100%;
+    transition: background-position .4s, background-size 0s;
+    color: #37C6F4;
+  }
+  .about-btn:active {
+    box-shadow: 0 0 9e9q inset #0009; 
+    background-color: var(--c);
+    color: #fff;
+  }
+  .about-btn {
+    font-family: system-ui, sans-serif;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: .3em .6em;
+    font-weight: bold;  
+    border: none;
+  }
+@media screen and (max-width: 700px){
+  .about{
+    background-size: auto;
+    height: 30vh;
+  }
+  .about-text{
+    padding: 0px !important;
+  }
+  .about-body{
+    font-size: 1em !important;
+    padding: 0px !important;
+  }
+}

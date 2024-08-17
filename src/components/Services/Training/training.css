@@ -1,0 +1,104 @@
+.trainsContainer {
+    padding: 0 2.5rem;
+    margin-top: 0px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
+  .trainContent {
+    border-bottom: 1px solid grey;
+  }
+  .trainLink {
+    text-decoration: none;
+    color: #37C6F4;
+  }
+  .trainCarac {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .trainPrice {
+    background-color: gray;
+    font-size: 15px;
+  }
+  .cardImg {
+    object-fit: fill;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    height: 220px;
+  }
+  .cardDesc{
+    text-align: justify;
+  }
+  .introduction {
+    margin-top: 5rem;
+    margin-bottom: 0;
+    background-color: rgb(235, 234, 230);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    width: 100%;
+  }
+  .introduction img {
+    width: 60%;
+  }
+  .imgDesc {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+  }
+  
+  @media (max-width: 400px) {
+    .imageDesc {
+      display: none;
+    }
+    .introduction{
+        width: 100%;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .trainsContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .desc h1{
+        font-size: 25px;
+    }
+    .desc h5{
+        font-size: 17px;
+        text-align: justify;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .imageDesc {
+      display: none;
+    }
+    .introduction{
+        width: 100%;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .trainsContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .desc h1{
+        font-size: 30px;
+    }
+    .desc h5{
+        font-size: 20px;
+        text-align: justify;
+    }
+  }
