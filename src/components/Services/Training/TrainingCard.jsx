@@ -11,11 +11,8 @@ export default function TrainingCard(props) {
     <Link to={props.url} target='blank' className='cardLink'>
         <Card style={{ width: '18rem' }} className='certifCard'>
             <Card.Img className='cardImg' variant="top" src={props.image} />
-            <Card.Body>
+            <Card.Body style={{height: 60}}>
                 <Card.Title className='cardTitle'>{props.name}</Card.Title>
-                <Card.Text className='cardDesc'>
-                {props.description}
-                </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
                 <ListGroup.Item className='caracts'><CiCalendarDate/> {props.date}</ListGroup.Item>

@@ -102,3 +102,19 @@
         text-align: justify;
     }
   }
+.filters{
+  padding: 0 2.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+#dropdown-basic-button{
+  background-color: white;
+}
+.filters .dropdown-button button{
+  width: 150px;
+}
+
+.filters .dropdown-menu {
+  width: 100%; /* Ensure the dropdown menu matches the button's width */
+}
