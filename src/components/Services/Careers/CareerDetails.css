@@ -1,0 +1,51 @@
+.career-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 8px;
+    gap: 20px;
+}
+
+.detail-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.icon-section {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.info-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.salary-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.range-bar {
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: black;
+}
+
+.salary-level {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+    color: #666;
+}
+
+.icon {
+    color: black;
+}

@@ -17,6 +17,10 @@ import Freelance from "./components/Services/Freelance/Freelance"
 import Dev from "./pages/GuideMe/Services/Dev/Dev"
 import Data from "./pages/GuideMe/Services/Data/Data"
 import ProtectedRoutes from "./services/protected_routes/ProtectedRoutes"
+import Careers from "./components/Services/Careers/Careers"
+import CareerPage from "./components/Services/Careers/CareerPage"
+import WebDev from "./pages/GuideMe/Services/Dev/web Dev/WebDev"
+import DynamicWebDev from "./pages/GuideMe/Services/Dev/web Dev/DynamicWebDev"
 
 function App() {
   return (
@@ -35,9 +39,14 @@ function App() {
             <Route path="/resume" element={<ProtectedRoutes><Cv/></ProtectedRoutes>}/>
             <Route path="/training" element={<ProtectedRoutes><Training/></ProtectedRoutes>}/>
             <Route path="/guide-me" element={<ProtectedRoutes><GuideMe/></ProtectedRoutes>}/>
+            <Route path="/careers" element={<ProtectedRoutes><Careers/></ProtectedRoutes>}/>
+            <Route path="/careers/:title" element={<ProtectedRoutes><CareerPage/></ProtectedRoutes>}/>
+            {/*END PROTECTED ROUTES*/}
             <Route path="/guide-me/development" element={<Dev/>}/>
             <Route path="/guide-me/data-and-analytics" element={<Data/>}/>
             <Route path="/freelance" element={<Freelance/>}/>
+            <Route path="/guide-me/development/web-development" element={<WebDev/>}/>
+            <Route path="/guide-me/development/web-development/:skill" element={<DynamicWebDev/>}/>
           </Routes>
         </Layout>
       </Router>

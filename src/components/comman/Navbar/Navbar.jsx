@@ -9,15 +9,15 @@ import "./navbar.css";
 import {
     AiOutlineFundProjectionScreen,
     AiOutlineHome,
-    AiOutlineUser,
-    AiOutlineContacts
+    /*AiOutlineUser,
+    AiOutlineContacts*/
   } from "react-icons/ai";
 
 import { LiaCertificateSolid, LiaChalkboardTeacherSolid } from "react-icons/lia";
-import { MdComputer } from "react-icons/md";
+/*import { MdComputer } from "react-icons/md";*/
 import { MdWorkOutline } from "react-icons/md";
 import { CgFileDocument } from "react-icons/cg";
-import { FaUserGraduate } from "react-icons/fa";
+//import { FaUserGraduate } from "react-icons/fa";
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { PersonCircle } from "react-bootstrap-icons";
@@ -75,16 +75,16 @@ const Navar = ({ isAuthenticated, logout, isGuideMe }) => {
                         navbarScroll
                         >
                         <Nav.Link href="/" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><AiOutlineHome/> HOME</Nav.Link>
-                        <Nav.Link href="/#about" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><AiOutlineUser/> ABOUT US</Nav.Link>
+                        {/*<Nav.Link href="/#about" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><AiOutlineUser/> ABOUT US</Nav.Link>*/}
                         <NavDropdown title={<><AiOutlineFundProjectionScreen/> SERVICES</>} id="navbarScrollingDropdown" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}>
                             <NavDropdown.Item href="/certificates"><LiaCertificateSolid /> CERTIFICATES</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4"><FaUserGraduate/> INTERNSHIPS</NavDropdown.Item>
-                            <NavDropdown.Item href="/freelance"><MdComputer/> FREELANCE</NavDropdown.Item>
-                            <NavDropdown.Item href="#action6"><MdWorkOutline/> CAREERS</NavDropdown.Item>
+                            {/*<NavDropdown.Item href="#action4"><FaUserGraduate/> INTERNSHIPS</NavDropdown.Item>
+                            <NavDropdown.Item href="/freelance"><MdComputer/> FREELANCE</NavDropdown.Item>*/}
+                            <NavDropdown.Item href="/careers"><MdWorkOutline/> CAREERS</NavDropdown.Item>
                             <NavDropdown.Item href="/resume"><CgFileDocument/> CV ASSISTANCE</NavDropdown.Item>
                             <NavDropdown.Item href="/training"><LiaChalkboardTeacherSolid/> TRAINING AND EVENTS</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="/#contact" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><AiOutlineContacts/> CONTACT US</Nav.Link>
+                        {/*<Nav.Link href="/#contact" className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><AiOutlineContacts/> CONTACT US</Nav.Link>*/}
                         <Nav.Link href='/guide-me' className={`mx-4 ${isGuideMe ? 'guideMeLink' : ''}`}><GiCrossroad/> GUIDE ME</Nav.Link>
                         </Nav>
                         {
@@ -95,7 +95,7 @@ const Navar = ({ isAuthenticated, logout, isGuideMe }) => {
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item>Taher</Dropdown.Item>
-                                        <Dropdown.Item href="#profile">Profile</Dropdown.Item>
+                                        {/*<Dropdown.Item href="#profile">Profile</Dropdown.Item>*/}
                                         <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>) :
@@ -121,4 +121,5 @@ const mapStateToProps = (state) => ({
     //user: state.auth.user,
   });
 
-export default connect(mapStateToProps, { logout })(Navar);
+const ConnectedNavar = connect(mapStateToProps, { logout })(Navar);
+export default ConnectedNavar;

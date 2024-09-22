@@ -25,4 +25,6 @@ const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(ProtectedRoute);
+const ConnectedProtectedRoute = connect(mapStateToProps)(ProtectedRoute);
+
+export default ConnectedProtectedRoute;

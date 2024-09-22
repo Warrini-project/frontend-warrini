@@ -110,4 +110,6 @@ Login.propTypes = {
     isAuthenticated: PropTypes.bool,
 };
 
-export default connect(mapStateToProps, { login })(Login);
+const ConnectedLogin = connect(mapStateToProps, { login })(Login);
+
+export default ConnectedLogin;

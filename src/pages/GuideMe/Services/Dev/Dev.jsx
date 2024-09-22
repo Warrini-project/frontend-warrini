@@ -1,4 +1,3 @@
-
 import Navar from "../../../../components/comman/Navbar/Navbar"
 import { Container, Row, Col } from "react-bootstrap";
 import desc from "../../../../assets/trainingandevents.png";
