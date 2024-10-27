@@ -5,24 +5,100 @@ import { Row, Col, Container } from "react-bootstrap";
 import cv from "../../../assets/cv.png";
 import "./cv.css";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { generateResume } from "./resumeService";
 
 const Cv = ({ isAuthenticated, user }) => {
-    const [startDate, setStartDate] = useState(new Date());
-    // State variables to manage technical and soft skills
-    const [technicalSkills, setTechnicalSkills] = useState([]);
-    const [softSkills, setSoftSkills] = useState([]);
+    const [profileImage, setProfileImage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        profession: "",
+        address: "",
+        phone: "",
+        email: "",
+        linkedin: "",
+        github: "",
+        summary: "",
+        educations: [{ degree: "", institution: "", duration: "" }],
+        languages: [""],
+        experiences: [{ name: "", place: "", duration: "", tasks: [""] }],
+        skills: [""],
+        certifications: [""],
+    });
 
-    // Function to handle adding a skill to the list
-    const handleAddSkill = (event, skills, setSkills) => {
-        if (event.key === 'Enter' && event.target.value.trim() !== '') {
-            const skill = event.target.value.trim();
-            setSkills([...skills, skill]);
-            event.target.value = ''; // Clear input field after adding skill
+    // Handle input change for simple fields
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    // Handle dynamic fields for array-type data
+    const handleArrayChange = (e, index, field) => {
+        const updatedArray = [...formData[field]];
+        updatedArray[index] = e.target.value;
+        setFormData({ ...formData, [field]: updatedArray });
+    };
+
+    // Handle nested fields in arrays (for educations, experiences)
+    const handleNestedArrayChange = (e, index, subField, field) => {
+        const updatedArray = [...formData[field]];
+        updatedArray[index][subField] = e.target.value;
+        setFormData({ ...formData, [field]: updatedArray });
+    };
+
+    const handleAddField = (field, newEntry) => {
+        setFormData({ ...formData, [field]: [...formData[field], newEntry] });
+    };
+
+    const handleRemoveField = (field, index) => {
+        const updatedArray = formData[field].filter((_, i) => i !== index);
+        setFormData({ ...formData, [field]: updatedArray });
+    };
+
+    // Handle adding and removing tasks within an experience
+    const handleAddTask = (experienceIndex) => {
+        const updatedExperiences = [...formData.experiences];
+        updatedExperiences[experienceIndex].tasks.push("");
+        setFormData({ ...formData, experiences: updatedExperiences });
+    };
+
+    const handleTaskChange = (e, experienceIndex, taskIndex) => {
+        const updatedExperiences = [...formData.experiences];
+        updatedExperiences[experienceIndex].tasks[taskIndex] = e.target.value;
+        setFormData({ ...formData, experiences: updatedExperiences });
+    };
+
+    const handleRemoveTask = (experienceIndex, taskIndex) => {
+        const updatedExperiences = [...formData.experiences];
+        updatedExperiences[experienceIndex].tasks = updatedExperiences[experienceIndex].tasks.filter((_, i) => i !== taskIndex);
+        setFormData({ ...formData, experiences: updatedExperiences });
+    };
+
+    const handleImageChange = (e) => {
+        setProfileImage(e.target.files[0]);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        const templateIndex = 5;
+        try {
+            const response = await generateResume(formData, templateIndex, profileImage);
+            
+            // Create a URL for the blob and open it in a new window/tab
+            const url = window.URL.createObjectURL(response);
+            window.open(url, '_blank');
+            //console.log("Resume generated successfully:", data);
+        } catch (error) {
+            console.error("Error generating resume:", error);
+        }
+        finally{
+            setIsLoading(false);
         }
     };
-    return(
+
+    return (
         <div>
             <Navar isAuthenticated={isAuthenticated} user={user}/>
             <Container className="cv-section">
@@ -38,67 +114,84 @@ const Cv = ({ isAuthenticated, user }) => {
                 </Row>
             </Container>
             <Container id="forum" className="forum">
-                <form>
-                    <h4>Personal Informations</h4>
-                    <input type="text" name="name" placeholder="Your Full Name*" required/>
-                    <input type="email" name="email" placeholder="Your Email*" required/>
-                    <input type="text" name="address" placeholder="Your Full Address*" required/>
+                <form onSubmit={handleSubmit}>
+                    <h4>Personal Information</h4>
+                    <input type="text" name="name" placeholder="Your Full Name*" value={formData.name} onChange={handleInputChange} required />
+                    <input type="text" name="profession" placeholder="Your Profession*" value={formData.profession} onChange={handleInputChange} required />
+                    <input type="text" name="phone" placeholder="Your Phone Number*" value={formData.phone} onChange={handleInputChange} required />
+                    <input type="email" name="email" placeholder="Your Email*" value={formData.email} onChange={handleInputChange} required />
+                    <input type="text" name="linkedin" placeholder="Your LinkedIn" value={formData.linkedin} onChange={handleInputChange} />
+                    <input type="text" name="github" placeholder="Your Github" value={formData.github} onChange={handleInputChange} />
+                    <input type="text" name="address" placeholder="Your Full Address*" value={formData.address} onChange={handleInputChange} required />
+                    
                     <h4>Professional Summary</h4>
-                    <textarea name="message" rows="7" placeholder="Brief summary of career goals or objective statement*" required></textarea>
+                    <textarea name="summary" rows="7" placeholder="Brief summary of career goals or objective statement*" value={formData.summary} onChange={handleInputChange} required></textarea>
+
                     <h4>Education</h4>
-                    <input type="text" name="name" placeholder="Degree*" required/>
-                    <input type="text" name="institutionName" placeholder="Name of Institution*" required/>
-                    <DatePicker title="Year of graduation" value="Year of graduation" name="Year of graduation" selected={startDate} onChange={(date) => setStartDate(date)} />
+                    {formData.educations.map((education, index) => (
+                        <div key={index}>
+                            <input style={{ marginBottom: "10px" }} type="text" placeholder="Degree*" value={education.degree} onChange={(e) => handleNestedArrayChange(e, index, "degree", "educations")} required />
+                            <input style={{ marginBottom: "10px" }} type="text" placeholder="Institution*" value={education.institution} onChange={(e) => handleNestedArrayChange(e, index, "institution", "educations")} required />
+                            <input type="text" placeholder="Duration*" value={education.duration} onChange={(e) => handleNestedArrayChange(e, index, "duration", "educations")} required />
+                            {index > 0 && <button style={{ marginTop: "10px" }} type="button" className="rm-btn" onClick={() => handleRemoveField("educations", index)}>Remove</button>}
+                        </div>
+                    ))}
+                    <button className="add-btn" type="button" onClick={() => handleAddField("educations", { degree: "", institution: "", duration: "" })}>Add Education</button>
+
+                    <h4>Experiences</h4>
+                    {formData.experiences.map((experience, expIndex) => (
+                        <div key={expIndex}>
+                            <input style={{ marginBottom: "10px" }} type="text" placeholder="Job Title*" value={experience.name} onChange={(e) => handleNestedArrayChange(e, expIndex, "name", "experiences")} required />
+                            <input style={{ marginBottom: "10px" }} type="text" placeholder="Company/Organization*" value={experience.place} onChange={(e) => handleNestedArrayChange(e, expIndex, "place", "experiences")} required />
+                            <input style={{ marginBottom: "10px" }} type="text" placeholder="Duration*" value={experience.duration} onChange={(e) => handleNestedArrayChange(e, expIndex, "duration", "experiences")} required />
+
+                            <h5>Experience Tasks</h5>
+                            {experience.tasks.map((task, taskIndex) => (
+                                <div key={taskIndex}>
+                                    <input style={{ marginBottom: "10px" }} type="text" placeholder="Task Description" value={task} onChange={(e) => handleTaskChange(e, expIndex, taskIndex)} />
+                                    {taskIndex > 0 && <button style={{ marginBottom: "10px" }} type="button" className="rm-btn" onClick={() => handleRemoveTask(expIndex, taskIndex)}>Remove Task</button>}
+                                </div>
+                            ))}
+                            <button type="button" className="add-btn" onClick={() => handleAddTask(expIndex)}>Add Task</button>
+
+                            {expIndex > 0 && <button type="button" className="rm-btn" onClick={() => handleRemoveField("experiences", expIndex)}>Remove Experience</button>}
+                        </div>
+                    ))}
+                    <button className="add-btn" type="button" onClick={() => handleAddField("experiences", { name: "", place: "", duration: "", tasks: [""] })}>Add Experience</button>
+
                     <h4>Skills</h4>
                     <div>
-                        <input 
-                            type="text"
-                            placeholder="Technical Skills*"
-                            onKeyUp={(event) => handleAddSkill(event, technicalSkills, setTechnicalSkills)}
-                        />
-                        <div>
-                            {technicalSkills.map((skill, index) => (
-                                <div key={index} className="skill">{skill}</div>
-                            ))}
-                        </div>
+                        {formData.skills.map((skill, index) => (
+                            <div key={index}>
+                                <input style={{ marginBottom: "10px" }} type="text" placeholder="Skill*" value={skill} onChange={(e) => handleArrayChange(e, index, "skills")} />
+                                {index > 0 && <button type="button" className="rm-btn" onClick={() => handleRemoveField("skills", index)}>Remove</button>}
+                            </div>
+                        ))}
                     </div>
-                    {/* Input field for Soft Skills */}
-                    <div>
-                        <input 
-                            type="text"
-                            placeholder="Soft Skills*"
-                            onKeyUp={(event) => handleAddSkill(event, softSkills, setSoftSkills)}
-                        />
-                        <div>
-                            {softSkills.map((skill, index) => (
-                                <div key={index} className="skill">{skill}</div>
-                            ))}
-                        </div>
-                    </div>
+                    <button className="add-btn" type="button" onClick={() => handleAddField("skills", "")}>Add Skill</button>
+
                     <h4>Certifications</h4>
-                    <div className="certifs">
-                        <input type="text" placeholder="Name of certification" name="CertifName" required/>
-                        <input type="text" placeholder="Issuing Organization" name="Organization" required/>
-                    </div>
-                    <DatePicker title="Date Earned" value="Date Earned" name="Date Earned" selected={startDate} onChange={(date) => setStartDate(date)} />
-                    <h4>Projects</h4>
-                    <div className="project1">
-                        <input type="text" placeholder="Title of project 1" name="projectTitle" required/>
-                        <input type="text" placeholder="Description" name="Description" required/>
-                        <input type="text" placeholder="Link (optional)" name="Link"/>
-                    </div>
-                    <div className="project2">
-                        <input type="text" placeholder="Title of project 2" name="projectTitle" required/>
-                        <input type="text" placeholder="Description" name="Description" required/>
-                        <input type="text" placeholder="Link (optional)" name="Link"/>
-                    </div>
-                    <h4>Additional Informations</h4>
-                    <input type="text" placeholder="Languages spoken" name="languages" required/>
-                    <h4>Resume/Cover Letter (Optional)</h4>
-                    <input type="file" name="file"/>
-                    <h4>Comments/Additional Notes (Optional)</h4>
-                    <textarea name="message" rows="7" placeholder="Any additional information or specific requests"></textarea>
-                    <button type="submit" className="contact-btn">Send Message</button>
+                    {formData.certifications.map((certification, index) => (
+                        <div key={index}>
+                            <input type="text" placeholder="Certification*" value={certification} onChange={(e) => handleArrayChange(e, index, "certifications")} />
+                            {index > 0 && <button style={{ marginTop: "10px" }} className="rm-btn" type="button" onClick={() => handleRemoveField("certifications", index)}>Remove</button>}
+                        </div>
+                    ))}
+                    <button className="add-btn" type="button" onClick={() => handleAddField("certifications", "")}>Add Certification</button>
+
+                    <h4>Languages</h4>
+                    {formData.languages.map((language, index) => (
+                        <div key={index}>
+                            <input type="text" placeholder="Language*" value={language} onChange={(e) => handleArrayChange(e, index, "languages")} />
+                            {index > 0 && <button style={{ marginTop: "10px" }} className="rm-btn" type="button" onClick={() => handleRemoveField("languages", index)}>Remove</button>}
+                        </div>
+                    ))}
+                    <button type="button" className="add-btn" onClick={() => handleAddField("languages", "")}>Add Language</button>
+
+                    <h4>Profile Picture</h4>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+
+                    <button type="submit" className={`send-btn ${isLoading ? 'loading' : ''}`} disabled={isLoading}>{!isLoading && 'Send Resume'}</button>
                 </form>
             </Container>
         </div>
@@ -115,4 +208,6 @@ const mapStateToProps = (state) => ({
     user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(Cv);
+const ConnectedCv = connect(mapStateToProps)(Cv);
+
+export default ConnectedCv;

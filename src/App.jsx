@@ -19,8 +19,14 @@ import Data from "./pages/GuideMe/Services/Data/Data"
 import ProtectedRoutes from "./services/protected_routes/ProtectedRoutes"
 import Careers from "./components/Services/Careers/Careers"
 import CareerPage from "./components/Services/Careers/CareerPage"
-import WebDev from "./pages/GuideMe/Services/Dev/web Dev/WebDev"
 import DynamicWebDev from "./pages/GuideMe/Services/Dev/web Dev/DynamicWebDev"
+import DynamicDevFields from "./pages/GuideMe/Services/Dev/DynamicDevFields"
+import DynamicMobileDev from "./pages/GuideMe/Services/Dev/mobile Dev/DynamicMobileDev"
+import DynamicSoftwareDev from "./pages/GuideMe/Services/Dev/software Dev/DynamicSoftwareDev"
+import GameDev from "./pages/GuideMe/Services/Dev/game Dev/GameDev"
+import DynamicData from "./pages/GuideMe/Services/Data/DynamicData"
+import InfraAndOperationsFields from "./pages/GuideMe/Services/Infrastructure_and_operations/InfraAndOperationsFields"
+import DynamicInfrastructure from "./pages/GuideMe/Services/Infrastructure_and_operations/DynamicInfrastructure"
 
 function App() {
   return (
@@ -44,9 +50,15 @@ function App() {
             {/*END PROTECTED ROUTES*/}
             <Route path="/guide-me/development" element={<Dev/>}/>
             <Route path="/guide-me/data-and-analytics" element={<Data/>}/>
+            <Route path="/guide-me/data-and-analytics/:skill" element={<DynamicData/>}/>
             <Route path="/freelance" element={<Freelance/>}/>
-            <Route path="/guide-me/development/web-development" element={<WebDev/>}/>
-            <Route path="/guide-me/development/web-development/:skill" element={<DynamicWebDev/>}/>
+            <Route path="/guide-me/development/:field" element={<DynamicDevFields/>}/>
+            <Route path="/guide-me/development/web development/:skill" element={<DynamicWebDev/>}/>
+            <Route path="/guide-me/development/mobile development/:skill" element={<DynamicMobileDev/>}/>
+            <Route path="/guide-me/development/software development/:skill" element={<DynamicSoftwareDev/>}/>
+            <Route path="/guide-me/development/game development" element={<GameDev/>}/>
+            <Route path="/guide-me/infrastructure-and-operations" element={<InfraAndOperationsFields/>}/>
+            <Route path="/guide-me/infrastructure-and-operations/:skill" element={<DynamicInfrastructure/>}/>
           </Routes>
         </Layout>
       </Router>

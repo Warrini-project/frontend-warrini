@@ -26,8 +26,9 @@ class Contact extends Component{
         e.target.reset();
     }
     render(){
+        const isSmallScreen = window.innerWidth < 576;
         return(
-            <section id="contact">
+            <section id="contact" style={{ marginBottom: isSmallScreen ? 50: 0 }}>
                 <Container fluid className="contact">
                     <Container className="contact-content">
                         <Row style={{ paddingTop: 100 }}>

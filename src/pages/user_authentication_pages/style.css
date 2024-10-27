@@ -118,3 +118,8 @@ hr{
     cursor: pointer;
     color: #888;
 }
+@media screen and (max-width:400px){
+    .login-background{
+        display: none;
+    }
+}

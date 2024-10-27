@@ -61,7 +61,7 @@ const Navar = ({ isAuthenticated, logout, isGuideMe }) => {
     }
     window.addEventListener("scroll", scrollHandler);
     return(
-        <Navbar expanded={expand} fixed="top" expand="md" className={navColor ? isGuideMe ? "sticky1": "sticky": "navbar"}>
+        <Navbar expanded={expand} fixed="top" expand="md" className={window.innerWidth<400 ? "sticky" : navColor ? isGuideMe ? "sticky1": "sticky": "navbar"}>
                 <Container>
                     <Navbar.Brand href="#home">Warrini.tn</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" onClick={() => {

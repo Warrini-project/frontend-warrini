@@ -17,17 +17,17 @@ export default function Services(){
                         OUR SERVICES
                     </h1>
                     <Row style={{ paddingTop: 50 }}>
-                        <Col md={4} className="service-card">
+                        <Col md={4} className="service-card" style={{ marginTop: 30 }}>
                             <ServiceCard icon={<LiaCertificateSolid/>} title="CERTIFICATES" border={true} link="/certificates"/>
                         </Col>
-                        <Col md={4} className="service-card">
+                        {/*<Col md={4} className="service-card">
                             <ServiceCard icon={<FaUserGraduate/>} title="INTERNSHIPS" border={true}/>
-                        </Col>
-                        <Col md={4} className="service-card">
+                        </Col>*/}
+                        {/*<Col md={4} className="service-card">
                             <ServiceCard icon={<MdComputer/>} title="FREELANCE" border={false}/>
-                        </Col>
+                        </Col>*/}
                         <Col md={4} className="service-card" style={{ marginTop: 30 }}>
-                            <ServiceCard icon={<MdWorkOutline/>} title="CAREERS" border={true}/>
+                            <ServiceCard icon={<MdWorkOutline/>} title="CAREERS" border={true} link="/careers"/>
                         </Col>
                         <Col md={4} className="service-card" style={{ marginTop: 30 }}>
                             <ServiceCard icon={<CgFileDocument/>} title="Resume" border={true} link="/resume"/>

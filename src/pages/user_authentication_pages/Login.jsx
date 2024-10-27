@@ -13,12 +13,12 @@ const Login = ({ login, isAuthenticated }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [formData, setFormData] = useState({
-        email: "",
+        username: "",
         password: ""
     });
     const [showPassword, setShowPassword] = useState(false);
 
-    const { email, password } = formData;
+    const { username, password } = formData;
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        login(email, password);
+        login(username, password);
     };
 
     useEffect(() => {
@@ -52,12 +52,12 @@ const Login = ({ login, isAuthenticated }) => {
                         <h1>WARRINI.TN</h1>
                         <form onSubmit={e => onSubmit(e)} className="login-form">
                             <input
-                                placeholder="Email address"
+                                placeholder="Username"
                                 id="floatingInputCustom"
-                                type="email"
-                                name="email"
+                                type="text"
+                                name="username"
                                 required
-                                value={email}
+                                value={username}
                                 onChange={onChange} />
                             <div className="password-container">
                                 <input
@@ -84,12 +84,16 @@ const Login = ({ login, isAuthenticated }) => {
                         <p>
                             Forgot your Password? <Link className="link" to="/reset-password">Reset Password</Link>
                         </p>
-                        <hr />
-                        <div className="social-btns">
-                            <button className="google-btn social-btn"><FcGoogle className="social-icon" /> Continue with Google</button>
-                            <button className="facebook-btn social-btn"><FaFacebook className="social-icon" /> Continue with Facebook</button>
-                            <button className="linkedin-btn social-btn"><FaLinkedinIn className="social-icon" /> Continue with Linkedin</button>
-                        </div>
+                        {
+                        /*  
+                            <hr />
+                            <div className="social-btns">
+                                <button className="google-btn social-btn"><FcGoogle className="social-icon" /> Continue with Google</button>
+                                <button className="facebook-btn social-btn"><FaFacebook className="social-icon" /> Continue with Facebook</button>
+                                <button className="linkedin-btn social-btn"><FaLinkedinIn className="social-icon" /> Continue with Linkedin</button>
+                            </div>
+                        */
+                        }
                     </Container>
                 </Col>
                 <Col md={7} xs={0} className="login-background">

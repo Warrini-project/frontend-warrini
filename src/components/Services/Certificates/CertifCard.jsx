@@ -13,9 +13,6 @@ export default function CertifCard(props) {
             <Card.Img className='cardImg' variant="top" src={props.image} />
             <Card.Body>
                 <Card.Title className='cardTitle'>{props.name}</Card.Title>
-                <Card.Text className='cardDesc'>
-                {props.description}
-                </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
                 <ListGroup.Item className='caracts'>{props.platformIcon} {props.platform}</ListGroup.Item>

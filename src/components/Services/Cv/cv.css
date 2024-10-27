@@ -64,3 +64,65 @@
         gap: 5px;
     }
 }
+.add-btn{
+    padding: 10px 15px;
+    color: #37C6F4;
+    background: white;
+    border: solid 1px #37C6F4;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.add-btn:hover{
+    background-color: #37C6F4;
+    color: white;
+}
+.rm-btn{
+    padding: 10px 15px;
+    color: #37C6F4;
+    background: white;
+    border: solid 1px #37C6F4;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.send-btn{
+    padding: 10px 15px;
+    color: white;
+    background: #37C6F4;
+    border: solid 1px #37C6F4;
+    border-radius: 5px;
+    text-decoration: none;
+    min-height: 42px; /* Adjust this value based on your button's normal height */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+}
+.send-btn {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.send-btn.loading {
+    color: transparent;
+    padding: 10px 15px;
+}
+
+.send-btn.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

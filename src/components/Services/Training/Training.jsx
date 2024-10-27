@@ -5,28 +5,60 @@ import { Row, Col, Container, DropdownButton, Dropdown } from "react-bootstrap";
 import desc from "../../../assets/trainingandevents.png";
 import { useEffect, useState } from "react";
 import { getDomains, getEvents } from "../../../services/actions/training_and_events/training_and_events";
+import train1 from "../../../assets/train1.jpg";
+import train2 from "../../../assets/event2.jpg";
 
 export default function Training(){
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([
+        {
+            link:"https://www.eventbrite.com/e/nashville-software-school-info-session-web-software-development-tickets-228988489737",
+            name:"AI Adoption for Business",
+            image:train2,
+            description:"Learn from technical and business experts on how business can adopt AI, why fine-tuning matters, open source models and more!",
+            price:10,
+            date:"2024-08-29",
+            location:"Ibis Hotel, Sfax",
+            domain_name: "AI",
+        },
+        {
+            link:"https://www.eventbrite.com/e/nashville-software-school-info-session-web-software-development-tickets-228988489737",
+            name:"Web Development",
+            image:train1,
+            description:"This information session is for individuals interested in learning more about Nashville Software School's Web + Software Development programs, including the Web Development Jumpstart and the full-time and part-time Web Development Bootcamp.",
+            price:0,
+            date:"2024-08-27",
+            location:"Virtual",
+            domain_name: "Web Development"
+        }
+    ]);
     const [domains, setDomains] = useState([]);
     const [selectedDomain, setSelectedDomain] = useState(null);
     const [selectedPrice, setSelectedPrice] = useState(null);
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         const fetchEvents = async () => {
             const data = await getEvents();
             setEvents(data);
         }
         fetchEvents();
     }, [])
-
+    
     useEffect(() =>{
         const fetchDomains = async () => {
-            const data = await getDomains();
-            setDomains(data);
+            //const data = await getDomains();
+            setDomains(events.map(event) => event.domain_name);
         }
         fetchDomains();
-    },[])
+    },[]);*/
+
+    useEffect(() => {
+        const fetchDomains = async () => {
+            // Get unique domain names from events
+            const uniqueDomains = [...new Set(events.map(event => event.domain_name))];
+            setDomains(uniqueDomains);
+        };
+        fetchDomains();
+    }, [events]);
 
     // Filter events based on the selected domain
     const filteredEvents = events.filter(event => {
@@ -66,7 +98,7 @@ export default function Training(){
                 >
                     <Dropdown.Item key="all" onSelect={() => setSelectedDomain(null)}>All Domains</Dropdown.Item>
                     {domains.map((domain, index) => (
-                        <Dropdown.Item key={index} eventKey={domain.name}>{domain.name}</Dropdown.Item>
+                        <Dropdown.Item key={index} eventKey={domain}>{domain}</Dropdown.Item>
                     ))}
                 </DropdownButton>
                 <DropdownButton 

@@ -8,6 +8,9 @@ import { MdWork, MdDisplaySettings } from 'react-icons/md';
 import { CiSettings } from 'react-icons/ci';
 import ConnectedNavar from "../../../../../components/comman/Navbar/Navbar";
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { IoRocketOutline } from "react-icons/io5";
 
 const frontend = [
     {
@@ -106,6 +109,14 @@ const backend = [
         },
         icon: <FaDatabase />,
     },
+    {
+        title: "Deployment",
+        content:{
+            "Technologies": ["Containerization", "Virtualization", "CI/CD"],
+            "Deployment Platform": ["AWS", "Microsoft Azure", "IBM Cloud", "Firebase"]
+        },
+        icon: <IoRocketOutline/>
+    }
 ];
 
 export default function DynamicWebDev() {
@@ -118,10 +129,13 @@ export default function DynamicWebDev() {
         timelineData = backend;
     }
 
+    const [isSelected, setIsSelected] = useState(false)
+
     return (
         <div className="container">
             <ConnectedNavar />
-            <Container style={{ marginTop: 100 }}>
+            {
+                isSelected == false ? <Container style={{ marginTop: 100 }}>
                 <VerticalTimeline lineColor="#37C6F4">
                     {timelineData.map((item, index) => (
                         <VerticalTimelineElement
@@ -140,7 +154,7 @@ export default function DynamicWebDev() {
                             <ul style={{ marginTop: "10px" }}>
                                 {Array.isArray(item.content) ? (
                                     item.content.map((point, idx) => (
-                                        <li key={idx}>{point}</li>
+                                        <li onClick={() => setIsSelected(true)} key={idx}>{point}</li>
                                     ))
                                 ) : (
                                     Object.entries(item.content).map(([section, contentList], idx) => (
@@ -158,7 +172,21 @@ export default function DynamicWebDev() {
                         </VerticalTimelineElement>
                     ))}
                 </VerticalTimeline>
+            </Container> : 
+            <Container style={{ marginTop: 100 }} onClick={() => setIsSelected(false)}>
+                <h1>HTTP</h1>
+                <h3>Overview</h3>
+                <p>HTTP is the TCP/IP based application layer communication protocol which standardizes how the client and server communicate with each other. HTTP follows a classical “Client-Server model” with a client opening a connection request, then waiting until it receives a response. HTTP is a stateless protocol, that means that the server does not keep any data (state) between two requests.</p>
+                <h3>Articles</h3>
+                <ul>
+                    <li><Link to="https://www.cloudflare.com/en-gb/learning/ddos/glossary/hypertext-transfer-protocol-http/">What is HTTP</Link></li>
+                    <li><Link to="https://cs.fyi/guide/http-in-depth">Everthing you need to know about HTTP</Link></li>
+                    <li><Link to="https://howhttps.works/">How HTTP works ?</Link></li>
+                </ul>
+                <h3>Certificates</h3>
+                <Link to="/certificates">Click Here</Link>
             </Container>
+            }
         </div>
     );
 }

@@ -5,7 +5,6 @@ import webDev from "../../../../assets/webdev.png";
 import gameDev from "../../../../assets/gameDev.png";
 import mobileDev from "../../../../assets/mobileDev.jpg";
 import softDev from "../../../../assets/softDev.jpg";
-import blockchainDev from "../../../../assets/blockchainDev.jpg"
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
@@ -18,32 +17,36 @@ export default function Dev(){
           title: "Web Development",
           image: webDev,
           description: "Equips participants with skills in designing, building, and maintaining websites and web applications, covering frontend and backend development, databases, and deployment.",
-          level: "40"
+          level: "40",
+          url: "web development",
         },
         {
             title: "Mobile Development",
             image: mobileDev,
             description: "Equips participants with skills in designing, building, and deploying mobile applications for platforms such as iOS and Android. Topics include UI design, app development frameworks, data management, and app store deployment.",
-            level: "10"
+            level: "10",
+            url: "mobile development",
         },
         {
             title: "Software Development",
             image: softDev,
             description: "Equips participants with skills in programming, software architecture, version control, testing, and deployment. Topics cover programming languages, methodologies, and industry tools.",
-            level: "80"
+            level: "80",
+            url: "software development",
         },
         {
             title: "Game Development",
             image: gameDev,
             description: "Equips participants with skills in designing, developing, and publishing video games. Topics include game design, engines, graphics programming, mechanics, and platform publishing.",
-            level: "30"
+            level: "30",
+            url: "game development"
         },
-        {
+        /*{
             title: "Blockchain Development",
             image: blockchainDev,
             description: "Equips participants with skills in developing dApps and smart contracts on platforms like Ethereum. Topics cover blockchain fundamentals, smart contracts, DeFi, and security.",
             level: "40"
-        },
+        },*/ 
     ];    
     const responsive = {
         superLargeDesktop: {
@@ -82,7 +85,7 @@ export default function Dev(){
             <Container style={{marginTop: "3.5rem", marginBottom: "3.5rem"}}>
                 <Carousel responsive={responsive}>
                     {development.map((item, index)=>(
-                        <Link to="/guide-me/development/web-development" key={index} style={{ textDecoration: 'none' }}>
+                        <Link to={`/guide-me/development/${item.url}`} key={index} style={{ textDecoration: 'none' }}>
                             <Card style={{ width: '25rem', height: '30rem' }} className="trainCard">
                                 <Card.Img variant="top" src={item.image} style={{ height: '15rem', objectFit: 'fill' }} />
                                 <Card.Body style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>

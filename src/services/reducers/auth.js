@@ -1,8 +1,7 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOAD_USER_SUCCESS, LOAD_USER_FAIL, Authenticated_SUCCESS, Authenticated_FAIL, LOGOUT, PASSWORD_RESET_FAIL, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_CONFIRM_FAIL, PASSWORD_RESET_CONFIRM_SUCCESS, SIGNUP_SUCCESS, SIGNUP_FAIL, ACTIVATION_SUCCESS, ACTIVATION_FAIL } from "../actions/types";
 
 const initialState = {
-    access: localStorage.getItem("access"),
-    refresh: localStorage.getItem("refresh"),
+    accessToken: localStorage.getItem("accessToken"),
     isAuthenticated: null,
     user: null
 }
@@ -16,12 +15,11 @@ export default function(state = initialState, actions){
                 isAuthenticated: true
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem("access", payload.access)
+            localStorage.setItem("accessToken", payload.accessToken)
             return{
                 ...state,
                 isAuthenticated: true,
-                access: payload.access,
-                refresh: payload.refresh
+                accessToken: payload.accessToken,
             }
         case SIGNUP_SUCCESS:
             return{
@@ -46,12 +44,10 @@ export default function(state = initialState, actions){
         case LOGIN_FAIL:
         case SIGNUP_FAIL:
         case LOGOUT:
-            localStorage.removeItem("access")
-            localStorage.removeItem("refresh")
+            localStorage.removeItem("accessToken")
             return{
                 ...state,
-                access: null,
-                refresh: null,
+                accessToken: null,
                 isAuthenticated: false,
                 user: null
             }
