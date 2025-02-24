@@ -22,13 +22,13 @@ export default function Data(){
           level: "40",
           redirectUrl: "data-science",
         },
-        {
+        /*{
             title: "Aritificial Intelligence",
             image: artificialIntelligence,
             description: "Unveils the realm of artificial intelligence, equipping individuals with the knowledge to build intelligent systems, understand neural networks, and harness the potential of AI for innovation and problem-solving.",
             level: "80",
             redirectUrl: "artificial-intelligence",
-        },
+        },*/
         {
             title: "Machine Learning",
             image: machineLearning,
@@ -36,7 +36,7 @@ export default function Data(){
             level: "10",
             redirectUrl: "machine-learning",
         },
-        {
+        /*{
             title: "Data Engineering",
             image: dataEngineeringImage,
             description: "Provides the skills to design, build, and maintain scalable data pipelines, enabling the efficient processing and management of vast amounts of data across various systems.",
@@ -49,7 +49,7 @@ export default function Data(){
             description: "Teaches learners how to interpret data trends, optimize business processes, and apply statistical methods to uncover actionable insights that enhance organizational performance.",
             level: "10",
             redirectUrl: "data-analytics"
-        },
+        },*/
         {
             title: "Business Intelligence (BI)",
             image: BIImage,

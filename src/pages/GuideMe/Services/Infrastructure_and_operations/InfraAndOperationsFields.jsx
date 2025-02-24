@@ -33,13 +33,13 @@ export default function InfraAndOperationsFields(){
             redirectUrl: "networking-and-security",
             image: securityImage
         },
-        {
+        /*{
             title: "Systems Administration",
             description: "Configure, maintain, and troubleshoot IT systems and operating environments.",
             level: "50",
             redirectUrl: "systems-administration",
             image: systemsAdminImage
-        },
+        },*/
     ];    
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 3, slidesToSlide: 2 },

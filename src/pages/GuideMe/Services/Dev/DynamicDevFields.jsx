@@ -47,24 +47,24 @@ export default function DynamicDevFields(){
             description: "Learn how to build apps for mobile devices, mastering iOS, Android, or cross-platform frameworks like Flutter and React Native.",
             image: mobile,
             fields: [
-                {
+                /*{
                     title: "iOS Development",
                     image: ios, // Replace with iOS-related image
                     redirectUrl: "ios development",
                     description: "Learn how to build robust iOS apps using Swift and Objective-C, with guidance on UI, functionality, and app store deployment."
-                },
+                },*/
                 {
                     title: "Android Development",
                     image: android, // Replace with Android-related image
                     redirectUrl: "android development",
                     description: "Build feature-rich Android applications using Kotlin and Java. Understand the Android architecture and app lifecycle."
                 },
-                {
+                /*{
                     title: "Cross-Platform Development",
                     image: cross,
                     redirectUrl: "cross-platform development",
                     description: "Learn how to build one application for many platforms using one code base.",
-                }
+                }*/
             ]
         },
         "software development": {
@@ -84,7 +84,7 @@ export default function DynamicDevFields(){
                     redirectUrl: "systems-programming",
                     description: "Develop low-level software like operating systems using C, C++, Rust, or Go.",
                 },
-                {
+                /*{
                     title: "Embedded Systems Development",
                     image: embeddedSystemsImage, // Add your image here
                     redirectUrl: "embedded-systems-development",
@@ -101,7 +101,7 @@ export default function DynamicDevFields(){
                     image: cloudNativeImage, // Add your image here
                     redirectUrl: "cloud-native-software-development",
                     description: "Build scalable cloud applications with AWS, Google Cloud, or Azure.",
-                }
+                }*/
             ]
         },
         // Similarly, add other development fields (software, game, blockchain)

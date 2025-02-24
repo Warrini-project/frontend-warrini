@@ -11,6 +11,12 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoRocketOutline } from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
+import PropTypes from 'prop-types';
+import skillsDetails from './DetaileSkillViewList';
+import { useDispatch } from 'react-redux';
+import { setSelectedSkill } from '../../../../../services/filter/filterSlice';
+import ReactPlayer from 'react-player';
 
 const frontend = [
     {
@@ -121,72 +127,113 @@ const backend = [
 
 export default function DynamicWebDev() {
     const { skill } = useParams();
-    var timelineData;
-    if(skill === "frontend development"){
-        timelineData = frontend;
-    }
-    else if(skill === "backend development"){
-        timelineData = backend;
-    }
+    const [selectedSkill, setSelectedSkill] = useState(null);
 
-    const [isSelected, setIsSelected] = useState(false)
+    // Determine which data to show based on skill parameter
+    let timelineData = skill === "frontend development" ? frontend : backend;
+
+    // Fetch the skill details by matching the selected skill name
+    const handleSkillClick = (skillName) => {
+        const skillDetail = skillsDetails.find((detail) => detail.name === skillName);
+        setSelectedSkill(skillDetail || null);
+    };
 
     return (
         <div className="container">
             <ConnectedNavar />
-            {
-                isSelected == false ? <Container style={{ marginTop: 100 }}>
-                <VerticalTimeline lineColor="#37C6F4">
-                    {timelineData.map((item, index) => (
-                        <VerticalTimelineElement
-                            key={index}
-                            className="vertical-timeline-element--work"
-                            contentStyle={{ background: '#fff', color: '#000', border: "2px solid #37C6F4" }}
-                            contentArrowStyle={{ borderRight: '7px solid  #37C6F4' }}
-                            iconStyle={{ background: '#37C6F4', color: '#fff' }}
-                            icon={item.icon}
-                        >
-                            <h3 className="vertical-timeline-element-title">{item.title}</h3>
-                            {item.subtitle && 
-                                <h4 className="vertical-timeline-element-subtitle">{item.subtitle}</h4>
-                            }
-                            {item.description && <p>{item.description}</p>}
-                            <ul style={{ marginTop: "10px" }}>
-                                {Array.isArray(item.content) ? (
-                                    item.content.map((point, idx) => (
-                                        <li onClick={() => setIsSelected(true)} key={idx}>{point}</li>
-                                    ))
-                                ) : (
-                                    Object.entries(item.content).map(([section, contentList], idx) => (
-                                        <div key={idx}>
-                                            <h4>{section}</h4>
-                                            <ul>
-                                                {contentList.map((contentItem, idx2) => (
-                                                    <li key={idx2}>{contentItem}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))
-                                )}
-                            </ul>
-                        </VerticalTimelineElement>
-                    ))}
-                </VerticalTimeline>
-            </Container> : 
-            <Container style={{ marginTop: 100 }} onClick={() => setIsSelected(false)}>
-                <h1>HTTP</h1>
-                <h3>Overview</h3>
-                <p>HTTP is the TCP/IP based application layer communication protocol which standardizes how the client and server communicate with each other. HTTP follows a classical “Client-Server model” with a client opening a connection request, then waiting until it receives a response. HTTP is a stateless protocol, that means that the server does not keep any data (state) between two requests.</p>
-                <h3>Articles</h3>
-                <ul>
-                    <li><Link to="https://www.cloudflare.com/en-gb/learning/ddos/glossary/hypertext-transfer-protocol-http/">What is HTTP</Link></li>
-                    <li><Link to="https://cs.fyi/guide/http-in-depth">Everthing you need to know about HTTP</Link></li>
-                    <li><Link to="https://howhttps.works/">How HTTP works ?</Link></li>
-                </ul>
-                <h3>Certificates</h3>
-                <Link to="/certificates">Click Here</Link>
-            </Container>
-            }
+            {selectedSkill ? (
+                <DetailedSkillView content={selectedSkill} onBack={() => setSelectedSkill(null)} />
+            ) : (
+                <Container style={{ marginTop: 100 }}>
+                    <VerticalTimeline lineColor="#37C6F4">
+                        {timelineData.map((item, index) => (
+                            <VerticalTimelineElement
+                                key={index}
+                                className="vertical-timeline-element--work"
+                                contentStyle={{ background: '#fff', color: '#000', border: "2px solid #37C6F4" }}
+                                contentArrowStyle={{ borderRight: '7px solid  #37C6F4' }}
+                                iconStyle={{ background: '#37C6F4', color: '#fff' }}
+                                icon={item.icon}
+                            >
+                                <h3 className="vertical-timeline-element-title">{item.title}</h3>
+                                {item.subtitle && <h4 className="vertical-timeline-element-subtitle">{item.subtitle}</h4>}
+                                {item.description && <p>{item.description}</p>}
+                                <ul style={{ marginTop: "10px" }}>
+                                    {Array.isArray(item.content) ? (
+                                        item.content.map((point, idx) => (
+                                            <li
+                                                onMouseEnter={(e) => (e.target.style.color = "#37C6F4")} onMouseLeave={(e) => (e.target.style.color = "black")} 
+                                                key={idx}
+                                                style={{ cursor: "pointer", marginTop: 5 }}
+                                                onClick={() => handleSkillClick(point)}
+                                            >
+                                                {point}
+                                            </li>
+                                        ))
+                                    ) : (
+                                        Object.entries(item.content).map(([section, contentList], idx) => (
+                                            <div key={idx}>
+                                                <h4>{section}</h4>
+                                                <ul>
+                                                    {contentList.map((contentItem, idx2) => (
+                                                        <li key={idx2} style={{ cursor: "pointer" }} onClick={() => handleSkillClick(contentItem)}>
+                                                            {contentItem}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))
+                                    )}
+                                </ul>
+                            </VerticalTimelineElement>
+                        ))}
+                    </VerticalTimeline>
+                </Container>
+            )}
         </div>
     );
+}
+
+function DetailedSkillView({ content, onBack }) {
+    const dispatch = useDispatch();
+    const handleSkillClick = (skill) => {
+        dispatch(setSelectedSkill(skill));
+    };
+    return (
+        <Container style={{ marginTop: 100 }}>
+            <button onClick={onBack} style={{ marginBottom: "20px", border: "none", backgroundColor: "white" }} onMouseEnter={(e) => (e.target.style.textDecoration = "underline")} onMouseLeave={(e) => (e.target.style.textDecoration = "none")}>
+                <IoArrowBack /> Back to Roadmap
+            </button>
+            <h1>{content.name}</h1>
+            <h3>Overview</h3>
+            <p>{content.overview}</p>
+            <h3>Articles</h3>
+            <ul>
+                {content.articles?.map((article, index) => (
+                    <li key={index}><a style={{ textDecoration: "none", color: "#37C6F4" }} href={article.url} target="_blank" rel="noopener noreferrer">{article.title}</a></li>
+                ))}
+            </ul>
+            <h3>Video</h3>
+            
+            <ReactPlayer style={{ marginBottom: "20px", marginTop: "20px" }} url={content.videos[0].url} width="100%" height="700px" controls/>
+            {
+                /*<ul>    
+                    {content.videos?.map((video, index) => (
+                        <li key={index}><a style={{ textDecoration: "none", color: "#37C6F4" }} href={video.url} target="_blank" rel="noopener noreferrer">{video.title}</a></li>
+                    ))}
+                </ul>*/
+            }
+            <h3>Certificates</h3>
+            <ul>
+                {content.certificates?.map((certificate, index) => (
+                    <li key={index}><Link onClick={() => handleSkillClick(content.name)} style={{ textDecoration: "none", color: "#37C6F4" }} to="/certificates">{certificate.title}</Link></li>
+                ))}
+            </ul>
+        </Container>
+    );
+}
+
+DetailedSkillView.propTypes = {
+    content: PropTypes.object,
+    onBack: PropTypes.func
 }

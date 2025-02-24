@@ -41,7 +41,7 @@ function App() {
             <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm/>}/>
             <Route path="/activate/:uid/:token" element={<Activate/>}/>
             {/*PROTECTED ROUTES*/}
-            <Route path="/certificates" element={<ProtectedRoutes><Certificates/></ProtectedRoutes>}/>
+            <Route path="/certificates/:domain?" element={<ProtectedRoutes><Certificates/></ProtectedRoutes>}/>
             <Route path="/resume" element={<ProtectedRoutes><Cv/></ProtectedRoutes>}/>
             <Route path="/training" element={<ProtectedRoutes><Training/></ProtectedRoutes>}/>
             <Route path="/guide-me" element={<ProtectedRoutes><GuideMe/></ProtectedRoutes>}/>
